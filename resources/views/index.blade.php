@@ -10,7 +10,7 @@
         <div class="flex bg-neutral-800 justify-between">
             <h1 class="font-semibold text-xl text-slate-100 flex items-center pl-5 pt-2 pb-2">Manage Students<h1>    
         <!-- Modal toggle -->
-        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 mr-5 mt-5 mb-5 pt-2 pb-2 focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        <button id="addDataToggle" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 mr-5 mt-5 mb-5 pt-2 pb-2 focus:outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Add Student
         </button>
 
@@ -87,7 +87,7 @@
             cache: false,
             processData: false,
             contentType: false,
-            success:function(res){
+            complete: function(res){
                 if(res.status == 200){
                     Swal.fire(
                         'Added!',
@@ -97,10 +97,10 @@
                 }
                 $("#add_student_btn").text('Add student');
                 $("#add_student")[0].reset();
-                $("#authentication-modal").modal('hide');
+                $("#addDataToggle").click();
             }
         });
-    });
+    })
 </script>
 
 </body>
