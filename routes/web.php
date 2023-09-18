@@ -19,3 +19,4 @@ use App\Http\Controllers\StudentController;
 
 
 Route::get('/', [StudentController::class, 'index']);
+Route::post('/store', [StudentController::class, 'store'])->name('store');
