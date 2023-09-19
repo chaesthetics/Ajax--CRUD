@@ -5,7 +5,7 @@
 <title>Crud operation</title>
 </head>
 <body>
-    <h1 class="font-semibold text-2xl text-gray-600 ">CRUD operation using laravel 10 and Ajax</h1>
+    <h1 class="pl-5 pt-5 font-semibold text-xl text-gray-600 ">CRUD operation using laravel 10 and Ajax</h1>
     <div class="Main-Card h-auto w-9/12 flex-col ml-auto mr-auto justify-center items-center mt-[30px] shadow-xl">
         <div class="flex bg-neutral-800 justify-between">
             <h1 class="font-semibold text-xl text-slate-100 flex items-center pl-5 pt-2 pb-2">Manage Students<h1>    
@@ -65,7 +65,7 @@
             </div>
         </div> 
         </div>
-        <div>
+        <div id="showAllStudents">
             <h1 class="font-bold flex justify-center text-gray-700 text-3xl">...<h1>
         </div>
     </div>
@@ -74,8 +74,22 @@
 <!-- import the jquery    -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<!-- Add New Student ajax request -->
+
 <script>
+// Fetch all Students ajax request
+    fetchAllStudents();
+
+    function fetchAllStudents(){
+        $.ajax({
+            url: '{{ route('fetchAll') }}',
+            method: 'get',
+            success: function(res){
+                $("#showAllStudents").html(res);
+            }
+        });
+    }
+
+//Add New Student ajax request
     $("#add_student").submit(function(e){
         e.preventDefault();
         const fd = new FormData(this);
@@ -94,6 +108,7 @@
                         'Student Added Successfully!',
                         'success'
                     )
+                    fetchAllStudents();
                 }
                 $("#add_student_btn").text('Add student');
                 $("#add_student")[0].reset();
