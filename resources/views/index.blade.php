@@ -53,7 +53,7 @@
                             </div>
                             <div>
                                 <label for="avatar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avatar</label>
-                                <input type="file" name="avatar" class="h-10 text-xs" required>
+                                <input type="file" name="avatar" class="h-10 text-xs focus:outline-none w-5/6 border bg-slate-100 border-solid-gray" required>
                             </div>
                             <button type="submit" id="add_student_btn" class="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Data</button>
                             <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
@@ -64,6 +64,7 @@
                 </div>
             </div>
         </div> 
+
         </div>
         <div id="showAllStudents">
             <h1 class="font-bold flex justify-center text-gray-700 text-3xl">...<h1>

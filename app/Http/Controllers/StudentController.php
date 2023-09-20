@@ -45,7 +45,7 @@ class StudentController extends Controller
         if($students->count() > 0){
             $output .= '
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <table class="stripe w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -79,7 +79,7 @@ class StudentController extends Controller
                     '.$student->id.'
                 </th>
                 <td class="px-6 py-4">
-                    <img class="rounded-lg h-14 w-14 object-cover" src="storage/images/'.$student->avatar.'">
+                    <img class="rounded-lg h-10 w-10 object-cover" src="storage/images/'.$student->avatar.'">
                 </td>
                 <td class="px-6 py-4">
                     '.$student->first_name.' '.$student->last_name.'
@@ -93,10 +93,9 @@ class StudentController extends Controller
                 <td class="px-6 py-4">
                     '.$student->phone.'
                 </td>
-                <td class="px-6 py-4">
-                <a href="#" class="text-blue-700 font-bold hover:underline" style="color:blue;">Edit</a>
-                /
-                <a href="#" class="text-red-700 font-bold hover:underline">Delete</a>
+                <td class="px-6 py-4 items-center text-center">
+                <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="flex text-center w-full text-white bg-blue-700 rounded-md hover:bg-blue-500 pt-2 pb-2 pl-5 pr-5 font-bold" type="button">Edit</button>
+                <button class="pt-2 pb-2 pl-5 pr-15 font-bold rounded-md text-white border bg-neutral-800 flex text-center w-full border-gray-800 ">Delete</button>
                 </td>
             </tr>';
             }
