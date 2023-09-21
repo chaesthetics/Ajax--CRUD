@@ -94,8 +94,8 @@ class StudentController extends Controller
                     '.$student->phone.'
                 </td>
                 <td class="px-6 py-4 items-center text-center">
-                <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="flex text-center w-full text-white bg-blue-700 rounded-md hover:bg-blue-500 pt-2 pb-2 pl-5 pr-5 font-bold" type="button">Edit</button>
-                <button class="pt-2 pb-2 pl-5 pr-15 font-bold rounded-md text-white border bg-neutral-800 flex text-center w-full border-gray-800 ">Delete</button>
+                <button id="'. $student->id .'" class="text-succes editIcon w-full focus:outline-none bg-blue-700 text-white font-bold pt-2 pb-2 pl-5 pr-5 rounded-md" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                <button class="pt-2 pb-2 pl-5 font-bold rounded-md text-white border bg-neutral-800 pr-5 w-full border-gray-800 ">Delete</button>
                 </td>
             </tr>';
             }

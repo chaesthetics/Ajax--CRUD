@@ -21,3 +21,4 @@ use App\Http\Controllers\StudentController;
 Route::get('/', [StudentController::class, 'index']);
 Route::post('/store', [StudentController::class, 'store'])->name('store');
 Route::get('fetch-all', [StudentController::class, 'fetchAll'])->name('fetchAll');
+Route::get('getdata', [StudentController::class, 'getData'])->name('getData');
