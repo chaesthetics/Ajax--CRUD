@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
-
+use Illuminate\Support\Facades\Storage;
 class StudentController extends Controller
 {
     //
@@ -79,7 +79,7 @@ class StudentController extends Controller
                     '.$student->id.'
                 </th>
                 <td class="px-6 py-4">
-                    <img class="rounded-lg h-10 w-10 object-cover" src="storage/images/'.$student->avatar.'">
+                    <img class="rounded-lg h-15 w-15 object-cover" src="storage/images/'.$student->avatar.'">
                 </td>
                 <td class="px-6 py-4">
                     '.$student->first_name.' '.$student->last_name.'
@@ -105,5 +105,45 @@ class StudentController extends Controller
             echo '<h1>No record in database</h1>';
         }
         
+    }
+
+    // handle edit student ajax request
+    public function edit(Request $request)
+    {
+        $id = $request->id;
+        $student = Student::find($id);
+        return response()->json($student);
+    }
+
+    // hande update student ajax request
+    public function update(Request $request)
+    {
+        $fileName = '';
+        $student = Student::find($request->student_id);
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $fileName = time(). '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $fileName);
+            if($student->avatar){
+                Storage::delete('public/images/'.$student->avatar);
+            }
+        }
+        else
+        {
+            $fileName = $request->student_avatar;
+        }
+        $studentData = [
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'course' => $request->course,
+            'avatar' => $fileName,
+        ];
+
+        $student->update($studentData);
+        return response()->json([
+            'status' => 200
+        ]);
     }
 }

@@ -87,30 +87,31 @@
                             <div class="flex justify-between">
                                 <div>
                                     <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Firstname</label>
-                                    <input type="text" name="fname" placeholder="Enter firstname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                                    <input type="text" id="fname" name="fname" placeholder="Enter firstname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
                                 </div>
                                 <div>
                                     <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lastname</label>
-                                    <input type="text" name="lname" placeholder="Enter lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                                    <input type="text" id="lname" name="lname" placeholder="Enter lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
                                 </div>
                                 </div>
                             <div>
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="text" name="email" placeholder="Enter email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                                <input type="text" id="email" name="email" placeholder="Enter email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
                             </div>
                             <div>
                                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                                <input type="text" name="phone" placeholder="Enter phone number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                                <input type="text" id="phone" name="phone" placeholder="Enter phone number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
                             </div>
                             <div>
                                 <label for="course" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
-                                <input type="text" name="course" placeholder="Enter course" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
+                                <input type="text" id="course" name="course" placeholder="Enter course" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required>
                             </div>
                             <div>
                                 <label for="avatar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Avatar</label>
-                                <input type="file" name="avatar" class="h-10 text-xs focus:outline-none w-5/6 border bg-slate-100 border-solid-gray" required>
+                                <input type="file" name="avatar" class="h-10 text-xs focus:outline-none w-5/6 border bg-slate-100 border-solid-gray">
                             </div>
-                            <button type="submit" id="update_student_btn" class="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Data</button>
+                            <div class="mt-2" id="avatar"></div>
+                            <button type="submit" id="edit_student_btn" class="w-full text-white bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Data</button>
                             <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Any problem? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Contact Admin</a>
                             </div>
@@ -179,12 +180,54 @@ fetchAllStudents();
 $(document).on("click", '.editIcon', function(e){
     e.preventDefault();
     let id = $(this).attr('id');
-    $ajax({
-        url: '{{ route('getData') }}'
+    $.ajax({
+        url: '{{ route('edit') }}',
+        method: 'get',
+        data:{
+            id: id,
+            _token: '{{ csrf_token() }}',
+        },
+        success: function(res){
+            $("#fname").val(res.first_name);
+            $("#lname").val(res.last_name);
+            $("#email").val(res.email);
+            $("#phone").val(res.phone);
+            $("#course").val(res.course);
+            $("#avatar").html(`<img src="storage/images/${res.avatar}" width="100" class="img-fluid img-thumbnail">`);
+            $("#student_id").val(res.id);
+            $("#student_avatar").val(res.avatar);
+        }
     });
 })
 
+// update student ajax request
 
+$("#edit_student").submit(function(e){
+    e.preventDefault();
+    const fd = new FormData(this);
+    $("#edit_student_btn").text('Updating...');
+    $.ajax({
+        url: '{{ route('update') }}',
+        method: 'post',
+        data: fd,
+        cache: false,
+        processData: false,
+        contentType: false,
+        complete:function(res){
+            if(res.status == 200){
+                Swal.fire(
+                    'Updated!',
+                    'Student Updated Successfully!',
+                    'success'
+                )
+                fetchAllStudents();
+            }
+            $("#edit_student_btn").text('Update Data');
+            $("#edit_student")[0].reset;
+            $("#exampleModal").modal('hide');
+        }
+    });
+});
     
 </script>
 
