@@ -2,6 +2,7 @@
 <head>
 @vite(['resources/css/app.css','resources/js/app.js'])
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script> fetchAllStudents(); </script>
 <title>Crud operation</title>
 </head>
 <body>
@@ -78,7 +79,7 @@
 
 <script>
 // Fetch all Students ajax request
-    fetchAllStudents();
+    
 
     function fetchAllStudents(){
         $.ajax({
