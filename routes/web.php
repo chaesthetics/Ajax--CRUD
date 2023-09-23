@@ -23,3 +23,4 @@ Route::post('/store', [StudentController::class, 'store'])->name('store');
 Route::get('fetch-all', [StudentController::class, 'fetchAll'])->name('fetchAll');
 Route::get('edit', [StudentController::class, 'edit'])->name('edit');
 Route::post('update', [StudentController::class, 'update'])->name('update');
+Route::post('delete', [StudentController::class, 'delete'])->name('delete');

@@ -228,6 +228,34 @@ $("#edit_student").submit(function(e){
         }
     });
 });
+
+
+// Delete student ajax request
+
+$(document).on("click", '.deleteIcon', function(e){
+    e.preventDefault();
+    let id = $(this).attr('id');
+    $.ajax({
+        url: '{{ route('delete') }}',
+        method: 'post',
+        data:{
+            id: id,
+            _token: '{{ csrf_token() }}',
+        },
+        complete:function(res){
+            if(res.status == 200){
+                Swal.fire(
+                    {
+                        icon:'error',
+                        title: 'Delete!',
+                        text: 'Student has been deleted',
+                    },
+                )
+                fetchAllStudents();
+            }
+        }
+    });
+});
     
 </script>
 
